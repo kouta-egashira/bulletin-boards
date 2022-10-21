@@ -33,7 +33,7 @@ class PostController extends Controller
         $post->body = $request->body;
         $post->user_id = Auth::id(); // ログイン中のユーザのidを入れられる
 
-        // 画像保存
+        // 画像保存をする
         if(request('image')) {
             $name = request()->file('image')->getClientOriginalName();
             $file = request()->file('image')->move('storage/images', $name);
