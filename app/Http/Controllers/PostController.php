@@ -20,7 +20,7 @@ class PostController extends Controller
     public function create() {
         return view('posts.create');
     }
-    
+
     // 入力してきた情報を受け取り保存
     public function store(PostRequest $request) { // PostRequest = Request/PostRequestで作成したバリデーションを使う
 
@@ -33,9 +33,16 @@ class PostController extends Controller
         $post->body = $request->body;
         $post->user_id = Auth::id(); // ログイン中のユーザのidを入れられる
 
+        // 画像保存
+        if(request('image')) {
+            $name = request()->file('image')->getClientOriginalName();
+            $file = request()->file('image')->move('storage/images', $name);
+            $post->image = $name;
+        }
+
         $post->save(); // インスタンスを作成したら保存しないといけない
 
-        return redirect()->route('posts.index'); 
+        return redirect()->route('posts.index');
     }
 
     // 作成データを個別表示
