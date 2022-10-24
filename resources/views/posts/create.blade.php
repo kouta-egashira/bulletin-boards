@@ -26,11 +26,10 @@
                         <label>内容</label>
                         <textarea class="form-control" placeholder="内容" rows="5" name="body"></textarea>
                     </div>
-                    <hr>
+                    <br>
                     {{-- 画像アップロード --}}
                     <div class="form-group">
-                        <label for="image">画像</label>
-                        <input type="file" class="form-control-file" id="image" name="image">
+                        <input id="image" type="file" name="image">
                     </div>
                     <br>
                     <button type="submit" class="btn btn-primary">作成する</button>

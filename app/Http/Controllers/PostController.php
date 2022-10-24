@@ -28,20 +28,20 @@ class PostController extends Controller
 
         // インスタンスを作成
         $post = new Post;
-
         $post->title = $request->title; // postの中にtitleを保存する。titleはrequestに来ていたtitle
         $post->body = $request->body;
         $post->user_id = Auth::id(); // ログイン中のユーザのidを入れられる
 
         // 画像保存をする
         if(request('image')) {
-            $name = request()->file('image')->getClientOriginalName();
+            // getClientOriginalName = 元々のファイル名でファイルを保存する
+            $original = request()->file('image')->getClientOriginalName();
+            $name = date('Ymd_His').'_'. $original; // 投稿した画像のパスに日時をいれる
             $file = request()->file('image')->move('storage/images', $name);
             $post->image = $name;
         }
 
         $post->save(); // インスタンスを作成したら保存しないといけない
-
         return redirect()->route('posts.index');
     }
 
@@ -77,6 +77,16 @@ class PostController extends Controller
 
         $post->title = $request->title;
         $post->body = $request->body;
+        $post->user_id = Auth::id(); // ログイン中のユーザのidを入れられる
+
+        // 画像保存をする
+        if(request('image')) {
+            // getClientOriginalName = 元々のファイル名でファイルを保存する
+            $original = request()->file('image')->getClientOriginalName();
+            $name = date('Ymd_His').'_'. $original; // 投稿した画像のパスに日時をいれる
+            $file = request()->file('image')->move('storage/images', $name);
+            $post->image = $name;
+        }
 
         $post->save(); // セーブする
 

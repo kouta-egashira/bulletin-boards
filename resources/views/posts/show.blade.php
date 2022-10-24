@@ -4,7 +4,7 @@
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-8">
-                <h2>一覧ページ</h2>
+                <h2>詳細ページ</h2>
                 <a href="{{route('posts.create')}}" class="btn btn-primary">新規投稿</a>
                 <div class="card text-center">
                     <div class="card-header">
@@ -13,9 +13,16 @@
                         <div class="card-body">
                             <h5 class="card-title">タイトル：{{$post->title}}</h5>
                             <p class="card-text">内容：{{$post->body}}</p>
+
+                            {{-- @if~@endif = 画像があれば表示する --}}
+                            @if ($post->image)
+                                <div>
+                                    <img src="{{asset('storage/images/'.$post->image)}}" style="height:200px">
+                                </div>
+                            @endif
+
                             {{-- $post->user->name = 投稿に紐ずくuserの名前を取得することができる --}}
                             <p class="card-text">投稿者：{{ $post->user->name }}</p>
-
                             {{-- ログイン中のuser_idとPostsのuser_idとAuthのidが一致したら、削除のボタンを表示する --}}
                             @if ($post->user_id === Auth::id())
                                 {{-- $post->idでパラメーターを渡す事で表示される投稿にidが振られる --}}
@@ -37,5 +44,5 @@
             </div>
         </div>
     </div>
-    
+
 @endsection

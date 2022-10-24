@@ -18,6 +18,7 @@ class CreatePostsTable extends Migration
             $table->unsignedBigInteger('user_id'); // unsignedBigInteger = 外部キーのデータ型によく使う
             $table->string('title');
             $table->string('body');
+            $table->text('image')->nullable(); // nullable = nullを許容する
             $table->timestamps();
 
             // 外部キー制約 (存在するuserのidしか登録できなくなるので整合性が保てる)
