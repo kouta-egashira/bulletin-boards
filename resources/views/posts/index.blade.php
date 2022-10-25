@@ -5,7 +5,11 @@
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <h2>投稿一覧</h2>
-                <a href="{{route('posts.create')}}" class="btn btn-primary">新規投稿</a>
+                <br>
+                <div>
+                    <a href="{{route('posts.create')}}" class="btn btn-primary">新規投稿</a>
+                </div>
+                <br>
                 <div class="card text-center">
                     <div class="card-header">
                         掲示板
