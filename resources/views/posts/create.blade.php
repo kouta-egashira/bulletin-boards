@@ -28,7 +28,7 @@
                     </div>
                     <br>
                     {{-- 画像アップロード --}}
-                    <div class="form-group">
+                    <div>
                         <input id="image" type="file" name="image">
                     </div>
                     <br>
