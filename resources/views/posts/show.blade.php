@@ -39,7 +39,6 @@
                                     <input type='submit' value='削除' class="btn btn-danger" onclick='return confirm("削除しますか？");'>
                                 </form>
                             @endif
-
                         </div>
                         <div class="card-footer text-muted">
                             投稿日：{{$post->created_at}}
@@ -47,6 +46,24 @@
                     </div>
             </div>
         </div>
+
+        {{-- コメントフォーム --}}
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <form action="{{route('comments.store')}}" method="POST">
+                    {{csrf_field()}} {{-- csrf_field() 悪意のあるユーザが来ないように保護 --}}
+                    <input type="hidden" name="post_id">
+                    <div class="form-group">
+                        <br>
+                        <label>コメント</label>
+                        <textarea class="form-control" placeholder="内容" rows="body"></textarea>
+                    </div>
+                    <br>
+                    <button type="submit" class="btn btn-primary">コメントする</button>
+                </form>
+            </div>
+        </div>
+
     </div>
 
 @endsection

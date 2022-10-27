@@ -23,4 +23,10 @@ class Post extends Model
     {
         return $this->belongsTo('App\Models\User');
     }
+
+    // 一つの投稿に複数のコメントを持つ
+    public function comments()
+    {
+        return $this->hasMany('App\Models\Comment');
+    }
 }

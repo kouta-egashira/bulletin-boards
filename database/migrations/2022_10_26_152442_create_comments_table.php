@@ -14,11 +14,15 @@ class CreateCommentsTable extends Migration
     public function up()
     {
         Schema::create('comments', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->unsignedBigInteger('user_id'); // userテーブルとの紐付け
-            $table->unsignedBigInteger('post_id'); // Postsテーブルとコメントテーブルの紐付け
-            $table->text('comment');
+            $table->bigIncrements('id'); // primaryキー
+            $table->unsignedBigInteger('user_id'); // 外部キー
+            $table->unsignedBigInteger('post_id'); // 外部キー
+            $table->text('body');
             $table->timestamps();
+
+            // 外部キー制約を付ける
+            $table->foreign('user_id')->references('id')->on('users'); // commentsテーブルのuser_idは、userテーブルに保存されているidしか登録できない
+            $table->foreign('post_id')->references('id')->on('posts');
         });
     }
 

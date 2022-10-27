@@ -50,4 +50,9 @@ class User extends Authenticatable
         return $this->hasMany('App\Models\Post');
     }
 
+    // 一人のユーザが複数のコメントを持つ
+    public function comments()
+    {
+        return $this->hasMany('App\Models\Comment');
+    }
 }
