@@ -48,7 +48,7 @@ class PostController extends Controller
     // 作成データを個別表示
     public function show($id) {  //$id = どの詳細かわかるようにidで受け取るように記載
         $post = Post::find($id); // PostModelからidを見つける
-
+        $post->load('user', 'comments'); // Post,commentテーブルのデータを一度に取得（Eagerロード）
         return view('posts.show', compact('post')); // show.bladeに送る
     }
 
