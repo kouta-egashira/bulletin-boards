@@ -99,15 +99,18 @@ class CommentController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(CommentRequest $request)
+    public function destroy($id)
     {
-        $comment = comment::find($request->comment_id);
-        $comment->delete();
+        // CommentModelからidを見つける
+        $comment = comment::find($id);
 
+        // ログイン中のidとPost_user_idが違ったら404エラーへ飛ばし、ログインユーザ以外が勝手に編集や削除をできなくする。
         if(Auth::id() !== $comment->user_id) {
             return abort(404);
         }
 
-        return redirect('posts.show');
+        $comment->delete();
+
+        return redirect()->route('posts.index');
     }
 }

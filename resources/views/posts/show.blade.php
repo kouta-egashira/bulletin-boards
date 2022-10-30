@@ -72,35 +72,31 @@
         <div class="row justify-content-center">
             <div class="col-md-8">
                 {{csrf_field()}} {{-- csrf_field() 悪意のあるユーザが来ないように保護 --}}
+
                 <div class="card text-center">
-                    <div class="card-header">
-                        コメント一覧
+                    <div class="card-header">コメント一覧</div>
+                    <div class="card-body">
+                        @foreach ($post->comments as $comment)
+                            <h5>投稿者：{{$comment->user->name}}</h5>
+                            <p>コメント：{{ $comment->body }}</p><br />
+                            @if ($comment->user_id === Auth::id()) {{-- ログイン中のuser_idとCommentsのuser_idとAuthのidが一致したら、削除のボタンを表示する --}}
+                                <form action='{{route('comments.destroy', $comment)}}' method='post'>
+                                {{ csrf_field() }}
+                                {{-- HTMLフォームはPUT、PATCH、DELETEアクションをサポートしてしていない為、擬似フォームメソッドを用いて送る --}}
+                                {{ method_field('DELETE') }}
+                                <div>
+                                    <input type='submit' value='削除' class="btn btn-danger" onclick='return confirm("削除しますか？");'>
+                                </div>
+                                <br>
+                                <br>
+                                </form>
+                            @endif
+                        @endforeach
                     </div>
-                        <div class="card-body">
-                            @forelse ($post->comments as $comment)
-                                <h5>投稿者：{{$comment->user->name}}</h5>
-                                <p>コメント：{{ $comment->body }}</p><br />
 
-                                @if ($comment->user_id === Auth::id()) {{-- ログイン中のuser_idとCommentsのuser_idとAuthのidが一致したら、削除のボタンを表示する --}}
-                                    <form action='{{route('comments.destroy', $comment)}}' method='post'>
-                                    {{ csrf_field() }}
-                                    {{-- HTMLフォームはPUT、PATCH、DELETEアクションをサポートしてしていない為、擬似フォームメソッドを用いて送る --}}
-                                    {{ method_field('DELETE') }}
-                                    <div>
-                                        <input type='submit' value='削除' class="btn btn-danger" onclick='return confirm("削除しますか？");'>
-                                    </div>
-                                    <br>
-                                    <br>
-                                    </form>
-                                @endif
-
-                            @endforeach
-                        </div>
-                    </div>
                 </div>
             </div>
         </div>
-
     </div>
 
 @endsection
