@@ -55,8 +55,7 @@ class CommentController extends Controller
 
         $comment->save();
 
-        // compactで取ってきたpostを渡す。
-        return view('posts.show', compact('post'));
+        return redirect()->route('posts.index');
     }
 
     /**
