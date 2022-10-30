@@ -24,9 +24,9 @@
                                     <img src="{{asset('storage/images/'.$post->image)}}" style="height:200px">
                                 </div>
                             @endif
-
+                            <br>
                             {{-- $post->user->name = 投稿に紐ずくuserの名前を取得することができる --}}
-                            <p class="card-text">投稿者：{{ $post->user->name }}</p>
+                            <p class="card-text">投稿者：{{ $post->user->name }}</p><br>
                             {{-- ログイン中のuser_idとPostsのuser_idとAuthのidが一致したら、削除のボタンを表示する --}}
                             @if ($post->user_id === Auth::id())
                                 {{-- $post->idは、パラメーターを渡す事により表示される投稿にidが振られる --}}
@@ -78,7 +78,7 @@
                     <div class="card-body">
                         @foreach ($post->comments as $comment)
                             <h5>投稿者：{{$comment->user->name}}</h5>
-                            <p>コメント：{{ $comment->body }}</p><br />
+                            <p>コメント：{{ $comment->body }}</p>
                             @if ($comment->user_id === Auth::id()) {{-- ログイン中のuser_idとCommentsのuser_idとAuthのidが一致したら、削除のボタンを表示する --}}
                                 <form action='{{route('comments.destroy', $comment)}}' method='post'>
                                 {{ csrf_field() }}
