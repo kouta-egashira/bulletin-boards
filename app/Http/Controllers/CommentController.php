@@ -103,11 +103,6 @@ class CommentController extends Controller
         // CommentModelからidを見つける
         $comment = comment::find($id);
 
-        // ログイン中のidとPost_user_idが違ったら404エラーへ飛ばし、ログインユーザ以外が勝手に編集や削除をできなくする。
-        if(Auth::id() !== $comment->user_id) {
-            return abort(404);
-        }
-
         $comment->delete();
 
         return redirect()->route('posts.index');
