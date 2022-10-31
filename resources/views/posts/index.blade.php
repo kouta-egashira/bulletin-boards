@@ -38,10 +38,12 @@
                                 <a href="{{route('posts.show', $post->id)}}" class="btn btn-primary">詳細</a>
                             </div>
                             <br>
-                            <div class="card-header">コメント一覧</div>
+                            <br>
+                            <br>
+                            <div><h5>コメント一覧</h5></div>
                             <br>
                             @foreach ($post->comments as $comment)
-                                <h5>コメント：{{ $comment->body }}</h5>
+                                <h6>コメント：{{ $comment->body }}</h6>
                                 <p>投稿者：{{$comment->user->name}}</p>
                             @endforeach
                         </div>

@@ -41,7 +41,13 @@
                         <input id="image" type="file" name="image">
                     </div>
                     <br>
-                    <button type="submit" class="btn btn-primary">更新する</button>
+                    <div>
+                        <button type="submit" class="btn btn-primary">更新する</button>
+                    </div>
+                    <br>
+                    <div>
+                        <a href="{{route('posts.index')}}" class="btn btn-danger">一覧へ戻る</a>
+                    </div>
                 </form>
             </div>
         </div>
