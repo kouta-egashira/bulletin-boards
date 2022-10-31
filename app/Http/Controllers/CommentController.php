@@ -10,6 +10,12 @@ use Illuminate\Support\Facades\Auth;
 
 class CommentController extends Controller
 {
+    // ログインしていなかったらログインページに遷移する（この処理を消すとログインしなくてもページを表示する）
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -28,12 +34,6 @@ class CommentController extends Controller
     public function create()
     {
         //
-    }
-
-    public function __construct()
-    {
-        // ログインしていなかったらログインページに遷移する（この処理を消すとログインしなくてもページを表示する）
-        $this->middleware('auth');
     }
 
     /**

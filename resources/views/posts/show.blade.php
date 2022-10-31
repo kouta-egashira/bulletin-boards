@@ -10,6 +10,9 @@
                     <a href="{{route('posts.create')}}" class="btn btn-primary">新規投稿</a>
                 </div>
                 <br>
+                <div><button type="button" class="btn btn-danger" onClick="history.back()">戻る</button></div>
+
+                <br>
                 <div class="card text-center">
                     <div class="card-header">
                         掲示板

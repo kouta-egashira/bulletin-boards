@@ -31,21 +31,22 @@
 
                             {{-- $post->user->name = 投稿に紐ずくuserの名前を取得することができる --}}
                             <p class="card-text">投稿者：{{ $post->user->name }}</p>
+                            <p class="card-text">投稿日：{{$post->created_at}}</p>
 
+                            {{-- $post->idでパラメーターを渡す事で表示される投稿にidが振られる --}}
+                            <div>
+                                <a href="{{route('posts.show', $post->id)}}" class="btn btn-primary">詳細</a>
+                            </div>
+                            <br>
                             <div class="card-header">コメント一覧</div>
                             <br>
                             @foreach ($post->comments as $comment)
                                 <h5>コメント：{{ $comment->body }}</h5>
                                 <p>投稿者：{{$comment->user->name}}</p>
                             @endforeach
-
-                            {{-- $post->idでパラメーターを渡す事で表示される投稿にidが振られる --}}
-                            <a href="{{route('posts.show', $post->id)}}" class="btn btn-primary">詳細</a>
                         </div>
-
-                        <div class="card-footer text-muted">
-                             投稿日：{{$post->created_at}}
-                        </div>
+                        <div class="card-footer text-muted"></div>
+                        <br>
 
                     @endforeach
                 </div>

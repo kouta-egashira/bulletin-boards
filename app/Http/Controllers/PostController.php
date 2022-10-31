@@ -8,6 +8,12 @@ use Illuminate\Support\Facades\Auth;
 
 class PostController extends Controller
 {
+    // ログインしていなかったらログインページに遷移する（この処理を消すとログインしなくてもページを表示する）
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     // 一覧表示
     public function index() {
         $posts = Post::all(); // PostModelから全て取ってくる
